@@ -11,17 +11,17 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Normally, do Firebase or JWT login/signup here
     alert(`${isLogin ? 'Logged in' : 'Signed up'} successfully!`);
-    navigate('/home'); // Redirect to home
+    navigate('/home');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 to-blue-200 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* ✅ Clear full background image */}
       <img
-        src="https://source.unsplash.com/1600x900/?travel,nature,karnataka"
-        alt="Travel Background"
-        className="absolute w-full h-full object-cover opacity-30"
+        src="/assets/images/background.webp"
+        alt="Login Background"
+        className="absolute w-full h-full object-cover z-0"
       />
 
       <motion.div

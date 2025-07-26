@@ -9,9 +9,11 @@ const PaymentPage = () => {
   const handlePayment = (e) => {
     e.preventDefault();
     setProcessing(true);
+
+    // Simulate payment process
     setTimeout(() => {
-      alert('Payment Successful!');
-      navigate('/home');
+      alert('✅ Payment Successful!');
+      navigate('/'); // Redirect to homepage after success
     }, 2000);
   };
 
@@ -43,7 +45,9 @@ const PaymentPage = () => {
             <input
               type="text"
               required
+              inputMode="numeric"
               maxLength="16"
+              pattern="\d{16}"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
               placeholder="1234 5678 9012 3456"
             />
@@ -56,6 +60,7 @@ const PaymentPage = () => {
                 type="text"
                 required
                 placeholder="MM/YY"
+                pattern="(0[1-9]|1[0-2])\/[0-9]{2}"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
               />
             </div>
@@ -65,8 +70,9 @@ const PaymentPage = () => {
                 type="password"
                 required
                 maxLength="4"
-                placeholder="123"
+                inputMode="numeric"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+                placeholder="123"
               />
             </div>
           </div>
@@ -74,7 +80,7 @@ const PaymentPage = () => {
           <motion.button
             type="submit"
             disabled={processing}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: processing ? 1 : 1.05 }}
             className={`w-full text-white font-semibold py-2 rounded-lg transition duration-300 ${
               processing
                 ? 'bg-gray-400 cursor-not-allowed'

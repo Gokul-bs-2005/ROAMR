@@ -14,6 +14,7 @@ import PaymentPage from './pages/PaymentPage';
 import CustomizePage from './pages/CustomizePage';
 import FeedbackPage from './pages/FeedbackPage';
 import HotelsVehiclesPage from './pages/HotelsVehiclesPage';
+import BookingPage from './pages/BookingPage'; // ✅ Make sure this file exists
 
 import './index.css'; // Tailwind + global styles
 
@@ -36,6 +37,9 @@ const App = () => {
             <Route path="/customization" element={<CustomizePage />} />
             <Route path="/feedback" element={<FeedbackPage />} />
             <Route path="/hotels-vehicles" element={<HotelsVehiclesPage />} />
+            <Route path="/booking/:placeName" element={<BookingPage />} />
+            <Route path="/book/:placeName" element={<BookingPage />} />
+
           </Routes>
         </main>
 
