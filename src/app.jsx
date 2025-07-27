@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -14,37 +14,132 @@ import PaymentPage from './pages/PaymentPage';
 import CustomizePage from './pages/CustomizePage';
 import FeedbackPage from './pages/FeedbackPage';
 import HotelsVehiclesPage from './pages/HotelsVehiclesPage';
-import BookingPage from './pages/BookingPage'; // ✅ Make sure this file exists
+import BookingPage from './pages/BookingPage';
+
+import PrivateRoute from './components/PrivateRoute';
 
 import './index.css'; // Tailwind + global styles
+
+// Wrapper for conditional layout
+const Layout = ({ children }) => {
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem('loggedIn') === 'true');
+  }, [location.pathname]);
+
+  const showLayout = isLoggedIn && location.pathname !== '/' && location.pathname !== '/login';
+
+  return (
+    <div className="bg-gradient-to-br from-blue-100 to-purple-200 min-h-screen flex flex-col">
+      {showLayout && <Navbar />}
+      <main className="flex-grow pt-20 px-4 sm:px-10">{children}</main>
+      {showLayout && <Footer />}
+    </div>
+  );
+};
 
 const App = () => {
   return (
     <Router>
-      <div className="bg-gradient-to-br from-blue-100 to-purple-200 min-h-screen flex flex-col">
-        <Navbar />
+      <Layout>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
 
-        <main className="flex-grow pt-20 px-4 sm:px-10">
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/help" element={<HelpPage />} />
-            <Route path="/plan-trip" element={<PlanTripPage />} />
-            <Route path="/trip-result" element={<TripResultPage />} />
-            <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/customization" element={<CustomizePage />} />
-            <Route path="/feedback" element={<FeedbackPage />} />
-            <Route path="/hotels-vehicles" element={<HotelsVehiclesPage />} />
-            <Route path="/booking/:placeName" element={<BookingPage />} />
-            <Route path="/book/:placeName" element={<BookingPage />} />
-
-          </Routes>
-        </main>
-
-        <Footer />
-      </div>
+          {/* Protected routes */}
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <HomePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <PrivateRoute>
+                <AboutPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/help"
+            element={
+              <PrivateRoute>
+                <HelpPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/plan-trip"
+            element={
+              <PrivateRoute>
+                <PlanTripPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/trip-result"
+            element={
+              <PrivateRoute>
+                <TripResultPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <PrivateRoute>
+                <PaymentPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/customization"
+            element={
+              <PrivateRoute>
+                <CustomizePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/feedback"
+            element={
+              <PrivateRoute>
+                <FeedbackPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/hotels-vehicles"
+            element={
+              <PrivateRoute>
+                <HotelsVehiclesPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/booking/:placeName"
+            element={
+              <PrivateRoute>
+                <BookingPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/book/:placeName"
+            element={
+              <PrivateRoute>
+                <BookingPage />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Layout>
     </Router>
   );
 };

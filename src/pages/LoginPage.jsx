@@ -35,18 +35,29 @@ const Login = () => {
       }
     }
 
+    localStorage.setItem("loggedIn", "true");
     alert(`${isLogin ? 'Logged in' : 'Signed up'} successfully!`);
     navigate('/home');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-black relative overflow-hidden">
       <img
         src="/assets/images/Background/Background.jpg"
         alt="Login Background"
         className="absolute w-full h-full object-cover opacity-60"
       />
       <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-purple-900/40 to-black/60 z-0" />
+
+      {/* ROAMR Title */}
+      <div className="relative z-10 mb-6 text-center">
+        <h1 className="text-6xl font-extrabold text-white tracking-widest drop-shadow-xl">
+          ROAMR
+        </h1>
+        <p className="text-purple-200 mt-2 text-lg tracking-wide drop-shadow-sm">
+          Explore Beyond Limits
+        </p>
+      </div>
 
       <motion.div
         className="relative z-10 bg-white/10 backdrop-blur-lg shadow-2xl rounded-3xl p-10 w-full max-w-md border border-white/20"
@@ -149,6 +160,20 @@ const Login = () => {
             className="text-purple-300 hover:underline font-semibold"
           >
             {isLogin ? 'Sign Up' : 'Login'}
+          </button>
+        </p>
+
+        <p className="mt-4 text-center text-sm text-white/80">
+          Want to skip login?{' '}
+          <button
+            type="button"
+            onClick={() => {
+              localStorage.setItem("loggedIn", "false");
+              navigate('/home');
+            }}
+            className="text-red-300 hover:underline font-semibold"
+          >
+            Continue as Guest
           </button>
         </p>
       </motion.div>
