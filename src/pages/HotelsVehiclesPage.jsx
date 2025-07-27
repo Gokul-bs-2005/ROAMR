@@ -2,13 +2,33 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const hotels = [
-  { name: "The Royal Orchid", location: "Mysuru", price: "₹2999/night", img: "https://source.unsplash.com/400x300/?hotel,room" },
-  { name: "Coorg Jungle Stay", location: "Coorg", price: "₹2499/night", img: "https://source.unsplash.com/400x300/?resort" },
+  {
+    name: "The Royal Orchid",
+    location: "Mysuru",
+    price: "₹2999/night",
+    img: "/assets/images/Hotels/Royal.jpg"
+  },
+  {
+    name: "Coorg Jungle Stay",
+    location: "Coorg",
+    price: "₹2499/night",
+    img: "/assets/images/Hotels/coorg.jpg"
+  }
 ];
 
 const vehicles = [
-  { type: "Sedan", company: "ZoomCar", price: "₹2000/day", img: "https://source.unsplash.com/400x300/?car,sedan" },
-  { type: "Bike", company: "Royal Brothers", price: "₹800/day", img: "https://source.unsplash.com/400x300/?bike,motorcycle" },
+  {
+    type: "Sedan",
+    company: "ZoomCar",
+    price: "₹2000/day",
+    img: "/assets/images/Vehicles/sedan.jpeg"
+  },
+  {
+    type: "Bike",
+    company: "Royal Brothers",
+    price: "₹800/day",
+    img: "/assets/images/Vehicles/royal enfield.jpg"
+  }
 ];
 
 const HotelVehicle = () => {
@@ -25,7 +45,11 @@ const HotelVehicle = () => {
               whileHover={{ scale: 1.03 }}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
             >
-              <img src={hotel.img} alt={hotel.name} className="w-full h-52 object-cover" />
+              <img
+                src={hotel.img}
+                alt={hotel.name}
+                className="w-full h-52 object-cover"
+              />
               <div className="p-4">
                 <h3 className="text-xl font-semibold text-gray-800">{hotel.name}</h3>
                 <p className="text-gray-600">{hotel.location}</p>
@@ -45,7 +69,11 @@ const HotelVehicle = () => {
               whileHover={{ scale: 1.03 }}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
             >
-              <img src={vehicle.img} alt={vehicle.type} className="w-full h-52 object-cover" />
+              <img
+                src={vehicle.img}
+                alt={vehicle.type}
+                className="w-full h-52 object-cover"
+              />
               <div className="p-4">
                 <h3 className="text-xl font-semibold text-gray-800">{vehicle.type}</h3>
                 <p className="text-gray-600">Company: {vehicle.company}</p>

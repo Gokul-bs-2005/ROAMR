@@ -24,7 +24,6 @@ const PlanForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!fromDate || !toDate || !budget || !destination) {
       alert('Please fill in all fields!');
       return;
@@ -37,55 +36,62 @@ const PlanForm = () => {
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-br from-blue-200 to-pink-100 flex justify-center items-center"
+      className="min-h-screen bg-gradient-to-br from-purple-300 via-pink-200 to-yellow-100 flex items-center justify-center p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.8 }}
     >
       <motion.form
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
         onSubmit={handleSubmit}
+        className="glassmorphic p-10 rounded-3xl w-full max-w-lg shadow-2xl"
         whileHover={{ scale: 1.02 }}
+        transition={{ type: 'spring', stiffness: 120 }}
       >
-        <h2 className="text-3xl font-bold text-center mb-6 text-purple-700">Plan Your Trip</h2>
+        <h2 className="text-4xl font-extrabold text-center text-purple-700 mb-8 tracking-wide animate-pulse">
+          Plan Your Dream Trip ✨
+        </h2>
 
-        <div className="mb-4">
-          <label className="block mb-1 font-semibold text-gray-700">From Date</label>
+        {/* From Date */}
+        <div className="mb-6">
+          <label className="block text-sm font-semibold text-gray-700 mb-1">From Date</label>
           <input
             type="date"
             value={fromDate}
             onChange={(e) => setFromDate(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-purple-400"
+            className="input-field"
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block mb-1 font-semibold text-gray-700">To Date</label>
+        {/* To Date */}
+        <div className="mb-6">
+          <label className="block text-sm font-semibold text-gray-700 mb-1">To Date</label>
           <input
             type="date"
             value={toDate}
             onChange={(e) => setToDate(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-purple-400"
+            className="input-field"
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block mb-1 font-semibold text-gray-700">Budget (in ₹)</label>
+        {/* Budget */}
+        <div className="mb-6">
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Budget (₹)</label>
           <input
             type="number"
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
             placeholder="Eg: 5000"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-purple-400"
+            className="input-field"
           />
         </div>
 
-        <div className="mb-6">
-          <label className="block mb-1 font-semibold text-gray-700">Destination</label>
+        {/* Destination */}
+        <div className="mb-8">
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Destination</label>
           <select
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-purple-400"
+            className="input-field"
           >
             <option value="">Select a place in Karnataka</option>
             {karnatakaPlaces.map((place) => (
@@ -96,12 +102,18 @@ const PlanForm = () => {
           </select>
         </div>
 
-        <button
+        {/* Submit Button */}
+        <motion.button
           type="submit"
-          className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold"
+          whileTap={{ scale: 0.95 }}
+          whileHover={{
+            backgroundColor: '#9333EA',
+            boxShadow: '0 0 12px #9333EA',
+          }}
+          className="w-full bg-purple-600 text-white py-3 rounded-xl text-lg font-semibold tracking-wide transition duration-300 hover:bg-purple-700"
         >
           Show My Plan 🚀
-        </button>
+        </motion.button>
       </motion.form>
     </motion.div>
   );
